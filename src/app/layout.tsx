@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sanacraft.com'),
   title: 'sanaCraft — Handcrafted Elegance, Timeless Artistry',
   description: 'Discover handmade crochet bouquets, plush velvet flower garlands, sacred divine thrones, and bespoke handmade keepsakes by Sana Craft Studio. Shop custom gifts with direct WhatsApp ordering!',
   keywords: [
