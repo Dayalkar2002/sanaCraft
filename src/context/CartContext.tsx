@@ -34,7 +34,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [currency, setCurrency] = useState<'USD' | 'INR'>('USD');
+  const [currency, setCurrency] = useState<'USD' | 'INR'>('INR');
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProductForModal, setSelectedProductForModal] = useState<Product | null>(null);
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -45,7 +45,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const savedCart = localStorage.getItem('sanacraft_cart');
       if (savedCart) setCart(JSON.parse(savedCart));
       const savedCurrency = localStorage.getItem('sanacraft_currency');
-      if (savedCurrency === 'USD' || savedCurrency === 'INR') setCurrency(savedCurrency);
+      if (savedCurrency === 'USD' || savedCurrency === 'INR') {
+        setCurrency(savedCurrency);
+      } else {
+        setCurrency('INR');
+      }
       const savedWishlist = localStorage.getItem('sanacraft_wishlist');
       if (savedWishlist) setWishlist(JSON.parse(savedWishlist));
     } catch (e) {
@@ -127,7 +131,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (currency === 'INR') {
       return `₹${priceINR.toLocaleString('en-IN')}`;
     }
-    return `$${priceUSD.toFixed(0)}`;
+    return `$${priceUSD.toFixed(1)}`;
   };
 
   return (

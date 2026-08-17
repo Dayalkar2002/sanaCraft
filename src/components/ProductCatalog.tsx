@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { PRODUCTS, CATEGORIES, Product, BUSINESS_INFO } from '@/data/products';
 import { useCart } from '@/context/CartContext';
-import { Search, SlidersHorizontal, Star, ShoppingBag, MessageCircle, Heart, Eye, Sparkles, Filter } from 'lucide-react';
+import { Search, Star, ShoppingBag, MessageCircle, Heart, Eye, Sparkles, Filter } from 'lucide-react';
 
 export default function ProductCatalog() {
   const {
@@ -18,7 +18,7 @@ export default function ProductCatalog() {
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [maxPriceUSD, setMaxPriceUSD] = useState<number>(300);
+  const [maxPriceINR, setMaxPriceINR] = useState<number>(500);
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
 
   const filteredProducts = useMemo(() => {
@@ -28,15 +28,15 @@ export default function ProductCatalog() {
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.features.some((f) => f.toLowerCase().includes(searchQuery.toLowerCase()));
-      const matchPrice = item.priceUSD <= maxPriceUSD;
+      const matchPrice = item.priceINR <= maxPriceINR;
       return matchCategory && matchSearch && matchPrice;
     }).sort((a, b) => {
-      if (sortBy === 'price-asc') return a.priceUSD - b.priceUSD;
-      if (sortBy === 'price-desc') return b.priceUSD - a.priceUSD;
+      if (sortBy === 'price-asc') return a.priceINR - b.priceINR;
+      if (sortBy === 'price-desc') return b.priceINR - a.priceINR;
       if (sortBy === 'rating') return b.rating - a.rating;
       return (b.isTrending ? 1 : 0) - (a.isTrending ? 1 : 0);
     });
-  }, [selectedCategory, searchQuery, maxPriceUSD, sortBy]);
+  }, [selectedCategory, searchQuery, maxPriceINR, sortBy]);
 
   const handleWhatsAppOrderSingle = (product: Product, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -72,7 +72,7 @@ Sana Craft 💐`
             Explore Our Aesthetic Creations
           </h2>
           <p className="text-base text-gray-600">
-            Browse our unique pipe cleaner & crochet floral art, divine seats, and custom garlands with dummy pricing options ($0 to $300).
+            Browse our unique pipe cleaner & crochet floral art, divine seats, and custom garlands priced from ₹50 to ₹450.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ Sana Craft 💐`
               )}
             </div>
 
-            {/* Price Slider Filter ($0 - $300) */}
+            {/* Price Slider Filter (₹0 - ₹500) */}
             <div className="w-full sm:w-72 bg-white p-2.5 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center">
               <div className="flex justify-between items-center text-xs font-semibold text-[#2D2727] mb-1">
                 <span className="flex items-center gap-1">
@@ -109,22 +109,22 @@ Sana Craft 💐`
                   Max Price Filter:
                 </span>
                 <span className="text-[#8E2020] font-bold font-serif text-sm">
-                  ${maxPriceUSD} {currency === 'INR' ? `(~₹${(maxPriceUSD * 82).toLocaleString('en-IN')})` : ''}
+                  ₹{maxPriceINR}
                 </span>
               </div>
               <input
                 type="range"
-                min="0"
-                max="300"
+                min="50"
+                max="500"
                 step="10"
-                value={maxPriceUSD}
-                onChange={(e) => setMaxPriceUSD(Number(e.target.value))}
+                value={maxPriceINR}
+                onChange={(e) => setMaxPriceINR(Number(e.target.value))}
                 className="w-full accent-[#C95B4A] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-gray-400 font-medium mt-0.5">
-                <span>$0</span>
-                <span>$150</span>
-                <span>$300</span>
+                <span>₹50</span>
+                <span>₹250</span>
+                <span>₹500</span>
               </div>
             </div>
 
@@ -165,12 +165,12 @@ Sana Craft 💐`
         {/* Results Counter */}
         <div className="flex items-center justify-between text-xs text-gray-600 font-medium px-2">
           <span>Showing <strong>{filteredProducts.length}</strong> handcrafted products</span>
-          {(selectedCategory !== 'All' || searchQuery || maxPriceUSD < 300) && (
+          {(selectedCategory !== 'All' || searchQuery || maxPriceINR < 500) && (
             <button
               onClick={() => {
                 setSelectedCategory('All');
                 setSearchQuery('');
-                setMaxPriceUSD(300);
+                setMaxPriceINR(500);
               }}
               className="text-[#C95B4A] hover:underline font-bold"
             >
@@ -191,7 +191,7 @@ Sana Craft 💐`
               onClick={() => {
                 setSelectedCategory('All');
                 setSearchQuery('');
-                setMaxPriceUSD(300);
+                setMaxPriceINR(500);
               }}
               className="bg-[#C95B4A] text-white font-semibold px-5 py-2 rounded-full text-xs"
             >
@@ -290,7 +290,7 @@ Sana Craft 💐`
                       {/* Price Tag */}
                       <div className="flex items-baseline justify-between">
                         <span className="text-xs text-gray-500 font-medium">Price:</span>
-                        <span className="text-lg font-serif font-extrabold text-[#8E2020]">
+                        <span className="text-xl font-serif font-extrabold text-[#8E2020]">
                           {formatPrice(product.priceUSD, product.priceINR)}
                         </span>
                       </div>

@@ -3,11 +3,11 @@
 import React from 'react';
 import Image from 'next/image';
 import { BUSINESS_INFO, PRODUCTS } from '@/data/products';
-import { Sparkles, MessageCircle, ShoppingBag, Heart, ArrowRight, CheckCircle2, Star } from 'lucide-react';
+import { Sparkles, MessageCircle, ShoppingBag, ArrowRight, Star } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export default function Hero() {
-  const { setSelectedProductForModal } = useCart();
+  const { setSelectedProductForModal, formatPrice } = useCart();
 
   const featuredHeroProducts = PRODUCTS.slice(0, 3);
 
@@ -61,7 +61,7 @@ export default function Hero() {
                 className="w-full sm:w-auto bg-gradient-to-r from-[#C95B4A] to-[#8E2020] text-white font-semibold px-8 py-3.5 rounded-full glow-btn flex items-center justify-center gap-2 text-base"
               >
                 <ShoppingBag className="w-5 h-5" />
-                <span>Explore Catalog ($0–$300)</span>
+                <span>Explore Collection (₹50–₹450)</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </a>
 
@@ -132,7 +132,7 @@ export default function Hero() {
                     </h3>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-xl font-extrabold text-amber-300">
-                        ${featuredHeroProducts[0].priceUSD} / ₹{featuredHeroProducts[0].priceINR}
+                        {formatPrice(featuredHeroProducts[0].priceUSD, featuredHeroProducts[0].priceINR)}
                       </span>
                       <button
                         onClick={() => setSelectedProductForModal(featuredHeroProducts[0])}
@@ -157,7 +157,7 @@ export default function Hero() {
                       </div>
                       <div className="overflow-hidden">
                         <h4 className="text-xs font-semibold text-[#2D2727] truncate">{item.title}</h4>
-                        <p className="text-xs text-[#8E2020] font-bold">${item.priceUSD}</p>
+                        <p className="text-xs text-[#8E2020] font-bold">{formatPrice(item.priceUSD, item.priceINR)}</p>
                       </div>
                     </div>
                   ))}
