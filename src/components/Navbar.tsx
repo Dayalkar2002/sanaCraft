@@ -2,11 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { BUSINESS_INFO } from '@/data/products';
-import { ShoppingBag, MessageCircle, Heart, Sparkles, Menu, X, Instagram, Phone } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Heart, Sparkles, Menu, X, Instagram, LogIn, LogOut, User as UserIcon } from 'lucide-react';
 
 export default function Navbar() {
   const { totalItems, setIsCartOpen, currency, setCurrency, wishlist } = useCart();
+  const { user, openAuthModal, logout } = useAuth();
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -84,14 +87,6 @@ export default function Navbar() {
             {/* Currency Selector Toggle */}
             <div className="flex items-center bg-[#FAF6F0] p-1 rounded-full border border-[#E88D7D]/30 text-xs font-semibold">
               <button
-                onClick={() => setCurrency('USD')}
-                className={`px-2.5 py-1 rounded-full transition-all ${
-                  currency === 'USD' ? 'bg-[#C95B4A] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#C95B4A]'
-                }`}
-              >
-                $ USD
-              </button>
-              <button
                 onClick={() => setCurrency('INR')}
                 className={`px-2.5 py-1 rounded-full transition-all ${
                   currency === 'INR' ? 'bg-[#C95B4A] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#C95B4A]'
@@ -99,17 +94,41 @@ export default function Navbar() {
               >
                 ₹ INR
               </button>
+              <button
+                onClick={() => setCurrency('USD')}
+                className={`px-2.5 py-1 rounded-full transition-all ${
+                  currency === 'USD' ? 'bg-[#C95B4A] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#C95B4A]'
+                }`}
+              >
+                $ USD
+              </button>
             </div>
 
-            {/* Direct WhatsApp Quick Chat */}
-            <button
-              onClick={openWhatsApp}
-              title="Chat with Sana Craft on WhatsApp"
-              className="hidden lg:flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-2 rounded-full transition-all shadow-sm whatsapp-glow"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>WhatsApp</span>
-            </button>
+            {/* Auth Profile / Sign In / Logout Button */}
+            {user ? (
+              <div className="flex items-center gap-2">
+                <div className="hidden lg:flex items-center gap-1.5 bg-rose-50 border border-rose-200 text-[#8E2020] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                  <UserIcon className="w-3.5 h-3.5 text-[#C95B4A]" />
+                  <span>Hi, {user.username}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  title="Log Out of Account"
+                  className="flex items-center gap-1 text-xs font-semibold bg-gray-100 hover:bg-red-50 text-gray-700 hover:text-red-600 border border-gray-200 px-3 py-1.5 rounded-full transition-colors"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => openAuthModal('signin')}
+                className="flex items-center gap-1.5 bg-[#C95B4A] hover:bg-[#8E2020] text-white text-xs font-bold px-3.5 py-2 rounded-full transition-all shadow-sm"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Sign In / Register</span>
+              </button>
+            )}
 
             {/* Wishlist Indicator */}
             {wishlist.length > 0 && (
@@ -152,12 +171,39 @@ export default function Navbar() {
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#FFFDF9] border-t border-[#E88D7D]/20 px-6 py-5 shadow-xl flex flex-col gap-4 text-center mt-2 animate-fadeIn">
+            {user ? (
+              <div className="py-2 bg-rose-50 rounded-xl p-3 flex items-center justify-between border border-rose-200">
+                <span className="text-xs font-bold text-[#8E2020]">🌸 Signed in as: {user.username}</span>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-xs text-red-600 font-bold flex items-center gap-1"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openAuthModal('signin');
+                }}
+                className="w-full bg-[#C95B4A] text-white font-bold py-2.5 rounded-full flex items-center justify-center gap-2 shadow-md"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>Sign In / Sign Up</span>
+              </button>
+            )}
+
             <a
               href="#catalog"
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#C95B4A]"
             >
-              Collection & Pricing ($0–$300)
+              Collection & Pricing (₹50–₹450)
             </a>
             <a
               href="#custom-order"
