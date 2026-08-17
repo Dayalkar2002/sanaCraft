@@ -39,7 +39,7 @@ export default function UserQueryContact() {
     },
     {
       q: 'How can I connect directly with Sana Craft Studio?',
-      a: 'You can tap any WhatsApp button on this site to start a direct chat, send us a free SMS query, or reach out via Instagram DM @sana_craftstudio!'
+      a: `You can tap any WhatsApp button on this site (+91 98925 90046), email us at ${BUSINESS_INFO.email}, or reach out via Instagram DM @sana_craftstudio!`
     }
   ];
 
@@ -126,7 +126,7 @@ Sana Craft 💐`;
                 </div>
                 <h4 className="text-lg font-serif font-bold text-emerald-900">Query Received Successfully!</h4>
                 <p className="text-xs text-emerald-800 max-w-sm mx-auto">
-                  Thank you for reaching out to Sana Craft 🌸✨. We have recorded your query and will connect with you shortly!
+                  Thank you for reaching out to Sana Craft 🌸✨. We have recorded your query and will connect with you shortly at {BUSINESS_INFO.email}!
                 </p>
                 <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
                   <button
@@ -162,7 +162,7 @@ Sana Craft 💐`;
                     <label className="text-xs font-bold text-[#2D2727] block mb-1">Phone Number / Email</label>
                     <input
                       type="text"
-                      placeholder="e.g. +91 9876543210"
+                      placeholder="e.g. +91 9892590046"
                       value={formData.phoneOrEmail}
                       onChange={(e) => setFormData({ ...formData, phoneOrEmail: e.target.value })}
                       className="w-full text-xs p-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#C95B4A] bg-white"
@@ -282,6 +282,26 @@ Sana Craft 💐`;
                   {copiedPhone ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
+
+              <a
+                href={`mailto:${BUSINESS_INFO.email}`}
+                className="flex items-center justify-between p-3 bg-white rounded-2xl border border-gray-100 hover:border-amber-300 transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <div className="text-[10px] uppercase text-gray-500 font-semibold">Official Email</div>
+                    <div className="text-xs font-bold text-[#2D2727] group-hover:text-amber-700 transition-colors truncate">
+                      {BUSINESS_INFO.email}
+                    </div>
+                  </div>
+                </div>
+                <span className="text-xs font-semibold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full shrink-0">
+                  Email Us
+                </span>
+              </a>
 
               <a
                 href={BUSINESS_INFO.instagramUrl}

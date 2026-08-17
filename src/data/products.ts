@@ -20,11 +20,11 @@ export const BUSINESS_INFO = {
   tagline: 'Handcrafted Elegance, Timeless Artistry',
   secondaryTagline: 'Crafting Memories into Forever Flowers & Divine Art',
   motto: 'Small Bouquet, Big Happiness 🌸✨',
-  whatsappNumber: '919876543210',
-  formattedPhone: '+91 98765 43210',
+  whatsappNumber: '919892590046',
+  formattedPhone: '+91 98925 90046',
   instagramUrl: 'https://www.instagram.com/sana_craftstudio?utm_source=qr&igsh=MXBxbXM4NzFwZzM0Yw==',
   instagramHandle: '@sana_craftstudio',
-  email: 'contact.sanacraft@gmail.com',
+  email: 'dayalkarmanish123@gmail.com',
   location: 'Mumbai, India (Shipping Worldwide)',
   welcomeGreeting: `Hello !
 Thank you for reaching out to Sana Craft. 🌸✨

@@ -63,32 +63,38 @@ export default function Footer() {
               </li>
               <li>
                 <a href="#custom-order" className="hover:text-[#E88D7D] transition-colors">
-                  Custom Order Request ($0–$300)
+                  Custom Order Request (₹50–₹450)
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Customer Care */}
+          {/* Col 3: Direct Contact */}
           <div className="space-y-3">
             <h4 className="text-sm font-serif font-bold text-amber-400 uppercase tracking-wider">
               Direct Contact
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li className="flex items-center gap-2">
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <button onClick={openWhatsApp} className="hover:text-emerald-400 transition-colors">
                   WhatsApp: {BUSINESS_INFO.formattedPhone}
                 </button>
               </li>
               <li className="flex items-center gap-2">
-                <Instagram className="w-3.5 h-3.5 text-pink-400" />
-                <a href={BUSINESS_INFO.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">
-                  Instagram: {BUSINESS_INFO.instagramHandle}
+                <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <a href={`mailto:${BUSINESS_INFO.email}`} className="hover:text-amber-300 transition-colors truncate">
+                  {BUSINESS_INFO.email}
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                <Instagram className="w-3.5 h-3.5 text-pink-400 shrink-0" />
+                <a href={BUSINESS_INFO.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors">
+                  {BUSINESS_INFO.instagramHandle}
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
                 <span>{BUSINESS_INFO.location}</span>
               </li>
             </ul>
