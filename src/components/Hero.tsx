@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { useCart } from '@/context/CartContext';
-import { BUSINESS_INFO } from '@/data/products';
+import { BUSINESS_INFO, PRODUCTS } from '@/data/products';
 import SanadeLogo from '@/components/SanadeLogo';
 import { Sparkles, ArrowRight, Heart, ShieldCheck, Star, MessageCircle, Leaf } from 'lucide-react';
 
 export default function Hero() {
-  const { setSelectedProduct, setIsModalOpen, formatPrice } = useCart();
+  const { setSelectedProductForModal, formatPrice } = useCart();
 
   const handleCustomOrderClick = () => {
     const el = document.getElementById('custom-order');
@@ -129,22 +129,7 @@ export default function Hero() {
                         {formatPrice(4, 250)}
                       </span>
                       <button
-                        onClick={() => {
-                          setSelectedProduct({
-                            id: 'sc-01',
-                            title: 'Sunburst Sunflower & Daisy Crochet Bouquet',
-                            category: 'Bouquets',
-                            priceUSD: 4,
-                            priceINR: 250,
-                            rating: 5.0,
-                            reviewCount: 48,
-                            image: '/images/product-1.jpg',
-                            description: 'Handmade crochet bouquet wrapped in vintage newspaper print with vibrant sunflower and white daisies.',
-                            features: ['100% Premium Yarn', 'Never Wither', 'Vintage Newspaper Wrap'],
-                            stock: 'In Stock'
-                          });
-                          setIsModalOpen(true);
-                        }}
+                        onClick={() => setSelectedProductForModal(PRODUCTS[0])}
                         className="bg-white text-[#7A3E38] hover:bg-[#FAF6F0] font-bold px-3 py-1.5 rounded-full shadow-sm text-xs transition-colors"
                       >
                         Quick View ↗
@@ -155,7 +140,10 @@ export default function Hero() {
 
                 {/* Sub-Feature Cards */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-gray-100 shadow-sm">
+                  <div
+                    onClick={() => setSelectedProductForModal(PRODUCTS[1])}
+                    className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-[#7A3E38]/40 transition-colors"
+                  >
                     <img
                       src="/images/product-2.jpg"
                       alt="Velvet Daisy Ensemble"
@@ -167,7 +155,10 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-gray-100 shadow-sm">
+                  <div
+                    onClick={() => setSelectedProductForModal(PRODUCTS[3])}
+                    className="flex items-center gap-2 p-2.5 bg-white rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-[#7A3E38]/40 transition-colors"
+                  >
                     <img
                       src="/images/product-4.jpg"
                       alt="Laddu Gopal Lotus Throne"
