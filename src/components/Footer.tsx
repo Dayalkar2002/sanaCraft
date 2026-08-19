@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { BUSINESS_INFO } from '@/data/products';
-import { Instagram, MessageCircle, Heart, Sparkles, Phone, Mail, MapPin } from 'lucide-react';
+import SanadeLogo from '@/components/SanadeLogo';
+import { Instagram, MessageCircle, Heart, Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const openWhatsApp = () => {
@@ -11,29 +12,17 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#2D2727] text-white pt-16 pb-12 border-t border-rose-900/30 relative overflow-hidden">
+    <footer className="bg-[#2D2727] text-white pt-16 pb-12 border-t border-[#7A3E38]/30 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10">
           
           {/* Col 1: Brand Info */}
           <div className="md:col-span-1 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E88D7D] to-[#8E2020] text-white flex items-center justify-center font-bold text-xl shadow-md">
-                🌸
-              </div>
-              <div>
-                <span className="text-2xl font-serif font-bold text-white tracking-tight">
-                  {BUSINESS_INFO.name}
-                </span>
-                <span className="text-[10px] uppercase tracking-widest text-[#E88D7D] font-semibold block -mt-1">
-                  Craft Studio
-                </span>
-              </div>
-            </div>
+            <SanadeLogo />
 
             <p className="text-xs text-white/70 leading-relaxed">
-              "{BUSINESS_INFO.tagline}"
+              "{BUSINESS_INFO.tagline}" — {BUSINESS_INFO.secondaryTagline}
             </p>
             <p className="text-xs text-amber-300/90 italic">
               {BUSINESS_INFO.motto}
@@ -47,22 +36,22 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li>
-                <a href="#catalog" className="hover:text-[#E88D7D] transition-colors">
+                <a href="#catalog" className="hover:text-amber-300 transition-colors">
                   Handmade Crochet Bouquets
                 </a>
               </li>
               <li>
-                <a href="#catalog" className="hover:text-[#E88D7D] transition-colors">
+                <a href="#catalog" className="hover:text-amber-300 transition-colors">
                   Velvet Flower Garlands (Haar)
                 </a>
               </li>
               <li>
-                <a href="#catalog" className="hover:text-[#E88D7D] transition-colors">
+                <a href="#catalog" className="hover:text-amber-300 transition-colors">
                   Laddu Gopal Lotus Thrones
                 </a>
               </li>
               <li>
-                <a href="#custom-order" className="hover:text-[#E88D7D] transition-colors">
+                <a href="#custom-order" className="hover:text-amber-300 transition-colors">
                   Custom Order Request (₹50–₹450)
                 </a>
               </li>
@@ -122,7 +111,7 @@ export default function Footer() {
         {/* Bottom Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 pt-4 gap-2">
           <div>
-            © {new Date().getFullYear()} {BUSINESS_INFO.fullName}. All rights reserved.
+            © {new Date().getFullYear()} {BUSINESS_INFO.name || BUSINESS_INFO.fullName}. All rights reserved.
           </div>
           <div className="flex items-center gap-1">
             <span>Handcrafted with</span>

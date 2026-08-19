@@ -16,6 +16,7 @@ export interface Product {
 
 export const BUSINESS_INFO = {
   name: 'Sanadé Crafts',
+  fullName: 'Sanadé Crafts Studio',
   brandName: 'Sanadé',
   tagline: 'Handmade with Love',
   secondaryTagline: 'Three Hearts. One Dream. Crafted with Love.',
