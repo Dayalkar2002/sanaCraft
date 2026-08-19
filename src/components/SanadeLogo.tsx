@@ -9,46 +9,32 @@ interface SanadeLogoProps {
 }
 
 export default function SanadeLogo({ className = '', showTagline = true, size = 'md' }: SanadeLogoProps) {
-  const iconSize = size === 'sm' ? 'w-8 h-8' : size === 'lg' ? 'w-16 h-16' : 'w-11 h-11';
-  const titleSize = size === 'sm' ? 'text-lg' : size === 'lg' ? 'text-3xl' : 'text-2xl';
+  const iconSize = size === 'sm' ? 'w-10 h-10' : size === 'lg' ? 'w-24 h-24' : 'w-14 h-14';
+  const titleSize = size === 'sm' ? 'text-base' : size === 'lg' ? 'text-3xl' : 'text-xl';
 
   return (
     <div className={`flex items-center gap-3 group ${className}`}>
-      {/* Emblem Monogram Icon */}
-      <div className={`relative ${iconSize} rounded-full bg-gradient-to-br from-[#7A3E38] via-[#2D3A2C] to-[#7A3E38] p-[1.5px] shadow-md transition-transform group-hover:scale-105 shrink-0`}>
-        <div className="w-full h-full rounded-full bg-[#FDFBF7] flex items-center justify-center relative overflow-hidden border border-[#D4AF37]/40">
-          {/* Circular Wreath Graphic */}
-          <svg viewBox="0 0 100 100" className="w-full h-full p-0.5" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Wreath circle */}
-            <circle cx="50" cy="50" r="42" stroke="#D4AF37" strokeWidth="1.5" strokeDasharray="3 2" />
-            <circle cx="50" cy="50" r="39" stroke="#7A3E38" strokeWidth="1" opacity="0.4" />
-            
-            {/* Leaves and Rose Buds Accent */}
-            <path d="M 18,50 Q 15,35 28,22 Q 40,12 50,15" stroke="#2D3A2C" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M 82,50 Q 85,65 72,78 Q 60,88 50,85" stroke="#2D3A2C" strokeWidth="1.5" strokeLinecap="round" />
-            
-            <circle cx="28" cy="22" r="3" fill="#7A3E38" />
-            <circle cx="72" cy="78" r="3" fill="#7A3E38" />
-            
-            {/* Monogram Text N S D and D */}
-            <text x="50" y="58" textAnchor="middle" fill="#7A3E38" fontFamily="Georgia, serif" fontSize="38" fontWeight="bold">D</text>
-            <text x="50" y="36" textAnchor="middle" fill="#2D3A2C" fontFamily="sans-serif" fontSize="9" fontWeight="bold" letterSpacing="1">N•S•D</text>
-          </svg>
-        </div>
+      {/* Exact Uploaded Circular Logo Image */}
+      <div className={`relative ${iconSize} rounded-full overflow-hidden shadow-md border-2 border-[#D4AF37] group-hover:scale-105 transition-transform shrink-0 bg-[#FFF5F3]`}>
+        <img
+          src="/images/sana-craft-logo.png"
+          alt="Sana Craft Studio Logo"
+          className="w-full h-full object-cover"
+        />
       </div>
 
       {/* Brand Text */}
       <div className="flex flex-col">
-        <span className={`${titleSize} font-serif font-bold text-[#7A3E38] tracking-tight leading-none group-hover:text-[#2D3A2C] transition-colors`}>
-          Sanadé
+        <span className={`${titleSize} font-serif font-extrabold text-[#8E2020] tracking-tight leading-none group-hover:text-[#C95B4A] transition-colors`}>
+          Sana Craft Studio
         </span>
-        <div className="flex items-center gap-1.5 mt-0.5">
-          <span className="text-[10px] uppercase tracking-[0.25em] text-[#2D3A2C] font-bold">
-            C R A F T S
+        <div className="flex items-center gap-1.5 mt-1">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-[#C95B4A] font-bold">
+            HANDMADE CROCHET & CRAFTS
           </span>
           {showTagline && (
-            <span className="text-[9px] text-[#7A3E38] italic font-serif hidden sm:inline-block">
-              — Handmade with Love ♥
+            <span className="text-[9px] text-[#8E2020] italic font-serif hidden sm:inline-block">
+              — Handmade with Love 🌸
             </span>
           )}
         </div>

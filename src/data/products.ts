@@ -15,31 +15,31 @@ export interface Product {
 }
 
 export const BUSINESS_INFO = {
-  name: 'Sanadé Crafts',
-  fullName: 'Sanadé Crafts Studio',
-  brandName: 'Sanadé',
+  name: 'Sana Craft Studio',
+  fullName: 'Sana Craft Studio',
+  brandName: 'Sana Craft Studio',
   tagline: 'Handmade with Love',
-  secondaryTagline: 'Three Hearts. One Dream. Crafted with Love.',
-  motto: 'Handmade • Sustainable • Made with Love • Unique & Thoughtful 🌿💖',
+  secondaryTagline: 'Handmade Crochet & Crafts',
+  motto: 'Handmade Crochet & Crafts • Crafted with Love 🌸✨',
   meaning: {
-    title: 'Meaning Behind Sanadé',
-    N: 'Namarata – Strength',
-    S: 'Sawri – Creativity',
-    D: 'Diksha – Dedication',
-    quote: 'Three hearts. One dream. Crafted with love.'
+    title: 'Meaning Behind Sana Craft Studio',
+    N: 'Strength & Passion',
+    S: 'Artistic Creativity',
+    D: 'Pure Dedication',
+    quote: 'Handmade Crochet & Crafts. Crafted with Love.'
   },
   whatsappNumber: '919892590046',
   formattedPhone: '+91 98925 90046',
   instagramUrl: 'https://www.instagram.com/sana_craftstudio?utm_source=qr&igsh=MXBxbXM4NzFwZzM0Yw==',
-  instagramHandle: '@sanadecrafts',
+  instagramHandle: '@sana_craftstudio',
   email: 'dayalkarmanish123@gmail.com',
   location: 'Mumbai, India (Made with love in India ♥)',
   welcomeGreeting: `Hello !
-Thank you for reaching out to Sanadé Crafts. 🌸✨
-We create handmade, sustainable and customized pipe cleaner & floral crafts. Please let us know your requirements, and we’ll be happy to assist you.
+Thank you for reaching out to Sana Craft Studio. 🌸✨
+We create handmade, customized crochet flowers & pipe cleaner crafts. Please let us know your requirements, and we’ll be happy to assist you.
 
 Regards,
-Sanadé Crafts 💐`
+Sana Craft Studio 💐`
 };
 
 export const PRODUCTS: Product[] = [
@@ -217,7 +217,7 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 14,
     image: '/images/product-13.jpg',
-    description: 'The ultimate Sanadé Crafts showpiece creation. Hand-sculpted large-scale floral garland set crafted for grand celebrations & mandir altars.',
+    description: 'The ultimate Sana Craft Studio showpiece creation. Hand-sculpted large-scale floral garland set crafted for grand celebrations & mandir altars.',
     features: ['Masterpiece Edition', 'Over 100 Hand-Bent Petals', 'Premium Pearl & Velvet Strands', 'Certificate of Authenticity'],
     isTrending: true,
     isBestSeller: true,
