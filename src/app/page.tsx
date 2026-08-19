@@ -5,6 +5,7 @@ import { CartProvider } from '@/context/CartContext';
 import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import BrandStory from '@/components/BrandStory';
 import ProductCatalog from '@/components/ProductCatalog';
 import CustomOrderWizard from '@/components/CustomOrderWizard';
 import InstagramSection from '@/components/InstagramSection';
@@ -19,10 +20,11 @@ export default function Home() {
   return (
     <AuthProvider>
       <CartProvider>
-        <div className="min-h-screen flex flex-col justify-between selection:bg-[#E88D7D] selection:text-white">
+        <div className="min-h-screen flex flex-col justify-between selection:bg-[#7A3E38] selection:text-white">
           <Navbar />
           <main className="flex-grow">
             <Hero />
+            <BrandStory />
             <ProductCatalog />
             <CustomOrderWizard />
             <InstagramSection />

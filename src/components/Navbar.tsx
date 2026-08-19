@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { BUSINESS_INFO } from '@/data/products';
+import SanadeLogo from '@/components/SanadeLogo';
 import { ShoppingBag, MessageCircle, Heart, Sparkles, Menu, X, Instagram, LogIn, LogOut, User as UserIcon } from 'lucide-react';
 
 export default function Navbar() {
@@ -29,10 +30,10 @@ export default function Navbar() {
   return (
     <>
       {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#8E2020] via-[#C95B4A] to-[#8E2020] text-white text-xs sm:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-2 shadow-sm">
+      <div className="bg-gradient-to-r from-[#7A3E38] via-[#2D3A2C] to-[#7A3E38] text-white text-xs sm:text-sm py-2 px-4 text-center font-medium flex items-center justify-center gap-2 shadow-sm">
         <Sparkles className="w-4 h-4 animate-pulse text-[#D4AF37]" />
         <span>✨ Welcome to <strong>{BUSINESS_INFO.name}</strong> — {BUSINESS_INFO.tagline}</span>
-        <span className="hidden md:inline-block text-white/80">| Free Gift Card with Every Bouquet!</span>
+        <span className="hidden md:inline-block text-white/80">| Three Hearts. One Dream. Crafted with Love.</span>
         <button
           onClick={openWhatsApp}
           className="ml-2 bg-white/20 hover:bg-white/30 text-white text-xs px-2.5 py-0.5 rounded-full transition-all flex items-center gap-1 border border-white/30"
@@ -50,46 +51,40 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo & Brand Name */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E88D7D] to-[#8E2020] text-white flex items-center justify-center font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
-              🌸
-            </div>
-            <div>
-              <span className="text-2xl font-serif font-bold text-[#8E2020] tracking-tight flex items-center gap-1">
-                {BUSINESS_INFO.name}
-              </span>
-              <span className="text-[10px] uppercase tracking-widest text-[#C95B4A] font-semibold block -mt-1">
-                Craft Studio
-              </span>
-            </div>
+          <a href="#" className="flex items-center gap-3">
+            <SanadeLogo />
           </a>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-8 font-medium text-sm text-[#2D2727]">
-            <a href="#catalog" className="hover:text-[#C95B4A] transition-colors">
+            <a href="#catalog" className="hover:text-[#7A3E38] transition-colors">
               Collection
             </a>
-            <a href="#custom-order" className="hover:text-[#C95B4A] transition-colors flex items-center gap-1">
+            <a href="#story" className="hover:text-[#7A3E38] transition-colors flex items-center gap-1">
+              <Heart className="w-3.5 h-3.5 text-rose-500" />
+              Our Story
+            </a>
+            <a href="#custom-order" className="hover:text-[#7A3E38] transition-colors flex items-center gap-1">
               <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
               Custom Crafts
             </a>
-            <a href="#instagram" className="hover:text-[#C95B4A] transition-colors flex items-center gap-1">
+            <a href="#instagram" className="hover:text-[#7A3E38] transition-colors flex items-center gap-1">
               <Instagram className="w-3.5 h-3.5 text-pink-600" />
               Gallery
             </a>
-            <a href="#contact" className="hover:text-[#C95B4A] transition-colors">
-              User Query & Contact
+            <a href="#contact" className="hover:text-[#7A3E38] transition-colors">
+              Contact
             </a>
           </nav>
 
           {/* Right Action Controls */}
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Currency Selector Toggle */}
-            <div className="flex items-center bg-[#FAF6F0] p-1 rounded-full border border-[#E88D7D]/30 text-xs font-semibold">
+            <div className="flex items-center bg-[#FAF6F0] p-1 rounded-full border border-[#7A3E38]/30 text-xs font-semibold">
               <button
                 onClick={() => setCurrency('INR')}
                 className={`px-2.5 py-1 rounded-full transition-all ${
-                  currency === 'INR' ? 'bg-[#C95B4A] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#C95B4A]'
+                  currency === 'INR' ? 'bg-[#7A3E38] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#7A3E38]'
                 }`}
               >
                 ₹ INR
@@ -97,7 +92,7 @@ export default function Navbar() {
               <button
                 onClick={() => setCurrency('USD')}
                 className={`px-2.5 py-1 rounded-full transition-all ${
-                  currency === 'USD' ? 'bg-[#C95B4A] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#C95B4A]'
+                  currency === 'USD' ? 'bg-[#7A3E38] text-white shadow-sm' : 'text-[#2D2727] hover:text-[#7A3E38]'
                 }`}
               >
                 $ USD
@@ -107,8 +102,8 @@ export default function Navbar() {
             {/* Auth Profile / Sign In / Logout Button */}
             {user ? (
               <div className="flex items-center gap-2">
-                <div className="hidden lg:flex items-center gap-1.5 bg-rose-50 border border-rose-200 text-[#8E2020] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">
-                  <UserIcon className="w-3.5 h-3.5 text-[#C95B4A]" />
+                <div className="hidden lg:flex items-center gap-1.5 bg-rose-50 border border-rose-200 text-[#7A3E38] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm">
+                  <UserIcon className="w-3.5 h-3.5 text-[#7A3E38]" />
                   <span>Hi, {user.username}</span>
                 </div>
                 <button
@@ -123,7 +118,7 @@ export default function Navbar() {
             ) : (
               <button
                 onClick={() => openAuthModal('signin')}
-                className="flex items-center gap-1.5 bg-[#C95B4A] hover:bg-[#8E2020] text-white text-xs font-bold px-3.5 py-2 rounded-full transition-all shadow-sm"
+                className="flex items-center gap-1.5 bg-[#7A3E38] hover:bg-[#2D3A2C] text-white text-xs font-bold px-3.5 py-2 rounded-full transition-all shadow-sm"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 <span>Sign In / Register</span>
@@ -134,11 +129,11 @@ export default function Navbar() {
             {wishlist.length > 0 && (
               <a
                 href="#catalog"
-                className="relative p-2 text-[#8E2020] hover:scale-110 transition-transform"
+                className="relative p-2 text-[#7A3E38] hover:scale-110 transition-transform"
                 title="Wishlist"
               >
-                <Heart className="w-5 h-5 fill-[#E88D7D] text-[#8E2020]" />
-                <span className="absolute -top-1 -right-1 bg-[#8E2020] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                <Heart className="w-5 h-5 fill-[#E88D7D] text-[#7A3E38]" />
+                <span className="absolute -top-1 -right-1 bg-[#7A3E38] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                   {wishlist.length}
                 </span>
               </a>
@@ -147,12 +142,12 @@ export default function Navbar() {
             {/* Shopping Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 bg-[#FFFDF9] border border-[#E88D7D]/40 hover:border-[#C95B4A] rounded-full text-[#8E2020] transition-all shadow-sm hover:shadow-md flex items-center justify-center"
+              className="relative p-2.5 bg-[#FFFDF9] border border-[#7A3E38]/40 hover:border-[#7A3E38] rounded-full text-[#7A3E38] transition-all shadow-sm hover:shadow-md flex items-center justify-center"
               title="Shopping Cart"
             >
               <ShoppingBag className="w-5 h-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#C95B4A] to-[#8E2020] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#7A3E38] to-[#2D3A2C] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm animate-bounce">
                   {totalItems}
                 </span>
               )}
@@ -161,7 +156,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#8E2020] rounded-lg hover:bg-black/5"
+              className="md:hidden p-2 text-[#7A3E38] rounded-lg hover:bg-black/5"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -170,10 +165,10 @@ export default function Navbar() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#FFFDF9] border-t border-[#E88D7D]/20 px-6 py-5 shadow-xl flex flex-col gap-4 text-center mt-2 animate-fadeIn">
+          <div className="md:hidden bg-[#FFFDF9] border-t border-[#7A3E38]/20 px-6 py-5 shadow-xl flex flex-col gap-4 text-center mt-2 animate-fadeIn">
             {user ? (
               <div className="py-2 bg-rose-50 rounded-xl p-3 flex items-center justify-between border border-rose-200">
-                <span className="text-xs font-bold text-[#8E2020]">🌸 Signed in as: {user.username}</span>
+                <span className="text-xs font-bold text-[#7A3E38]">🌸 Signed in as: {user.username}</span>
                 <button
                   onClick={() => {
                     logout();
@@ -191,7 +186,7 @@ export default function Navbar() {
                   setMobileMenuOpen(false);
                   openAuthModal('signin');
                 }}
-                className="w-full bg-[#C95B4A] text-white font-bold py-2.5 rounded-full flex items-center justify-center gap-2 shadow-md"
+                className="w-full bg-[#7A3E38] text-white font-bold py-2.5 rounded-full flex items-center justify-center gap-2 shadow-md"
               >
                 <LogIn className="w-4 h-4" />
                 <span>Sign In / Sign Up</span>
@@ -201,14 +196,21 @@ export default function Navbar() {
             <a
               href="#catalog"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#C95B4A]"
+              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#7A3E38]"
             >
               Collection & Pricing (₹50–₹450)
             </a>
             <a
+              href="#story"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#7A3E38]"
+            >
+              Meaning Behind Sanadé
+            </a>
+            <a
               href="#custom-order"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#C95B4A] flex items-center justify-center gap-1"
+              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#7A3E38] flex items-center justify-center gap-1"
             >
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               Custom Order Builder
@@ -216,14 +218,14 @@ export default function Navbar() {
             <a
               href="#instagram"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#C95B4A]"
+              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#7A3E38]"
             >
               Instagram Showcase
             </a>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#C95B4A]"
+              className="py-2 text-[#2D2727] font-medium border-b border-gray-100 hover:text-[#7A3E38]"
             >
               User Query & Contact
             </a>
