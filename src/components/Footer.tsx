@@ -12,14 +12,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#2D2727] text-white pt-16 pb-12 border-t border-[#7A3E38]/30 relative overflow-hidden">
+    <footer className="bg-[#1A1412] text-white pt-16 pb-12 border-t border-[#D4AF37]/25 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10">
           
           {/* Col 1: Brand Info */}
           <div className="md:col-span-1 space-y-4">
-            <SanadeLogo />
+            <SanadeLogo onDark />
 
             <p className="text-xs text-white/70 leading-relaxed">
               "{BUSINESS_INFO.tagline}" — {BUSINESS_INFO.secondaryTagline}

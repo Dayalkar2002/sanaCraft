@@ -46,7 +46,9 @@ export default function Navbar() {
       {/* Main Navigation */}
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
-          scrolled ? 'glass-panel shadow-md py-3' : 'bg-[#FAF6F0]/90 backdrop-blur-md py-4'
+          scrolled
+            ? 'glass-panel shadow-[0_8px_30px_rgba(122,62,56,0.12)] py-3 border-b border-[#D4AF37]/25'
+            : 'bg-[#FAF6F0]/90 backdrop-blur-md py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">

@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import { BUSINESS_INFO } from '@/data/products';
+import { useAuth } from '@/context/AuthContext';
 import { MessageCircle, Send, Phone, Mail, MapPin, Copy, Check, ChevronDown, ChevronUp, Sparkles, MessageSquare, Instagram } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function UserQueryContact() {
+  const { requireAuth } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     phoneOrEmail: '',
@@ -56,8 +58,9 @@ export default function UserQueryContact() {
   };
 
   const handleWhatsAppDirect = () => {
-    const queryDetails = formData.message ? `\n*Query:* ${formData.message}` : '';
-    const text = `Hello !
+    const sendQuery = () => {
+      const queryDetails = formData.message ? `\n*Query:* ${formData.message}` : '';
+      const text = `Hello !
 Thank you for reaching out to Sana Craft. 🌸✨
 We create handmade and customized pipe cleaner crafts.
 
@@ -71,8 +74,12 @@ Please let us know your requirements, and we’ll be happy to assist you.
 Regards,
 Sana Craft 💐`;
 
-    const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
+    };
+
+    if (!requireAuth(sendQuery, 'Sign in to book and send your order inquiry')) return;
+    sendQuery();
   };
 
   const handleSmsDirect = () => {

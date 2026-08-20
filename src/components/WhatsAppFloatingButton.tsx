@@ -21,8 +21,8 @@ export default function WhatsAppFloatingButton() {
           <div className="bg-gradient-to-r from-emerald-700 to-emerald-600 text-white p-4 flex items-center justify-between shadow-md">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-white/20 text-xl flex items-center justify-center border border-white/30">
-                  🌸
+                <div className="w-10 h-10 rounded-full overflow-hidden bg-[#F8F1E7] border border-white/30">
+                  <img src="/images/snd-logo.png" alt="SND" className="w-full h-full object-cover" />
                 </div>
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-emerald-700 rounded-full" />
               </div>

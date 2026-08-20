@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import { BUSINESS_INFO } from '@/data/products';
 import { Sparkles, MessageCircle, Heart, Gift, Palette, DollarSign, Send, CheckCircle2 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 
 export default function CustomOrderWizard() {
   const { currency } = useCart();
+  const { requireAuth } = useAuth();
   const [occasion, setOccasion] = useState('Birthday Celebration');
   const [craftStyle, setCraftStyle] = useState('Crochet Flower Bouquet');
   const [budgetUSD, setBudgetUSD] = useState(75);
@@ -29,9 +31,10 @@ export default function CustomOrderWizard() {
   ];
 
   const handleSendCustomWhatsApp = () => {
-    const budgetStr = currency === 'INR' ? `₹${(budgetUSD * 82).toLocaleString('en-IN')} (~$${budgetUSD})` : `$${budgetUSD}`;
+    const sendCustomOrder = () => {
+      const budgetStr = currency === 'INR' ? `₹${(budgetUSD * 82).toLocaleString('en-IN')} (~$${budgetUSD})` : `$${budgetUSD}`;
 
-    const text = `Hello !
+      const text = `Hello !
 Thank you for reaching out to Sana Craft. 🌸✨
 We create handmade and customized pipe cleaner crafts.
 
@@ -47,8 +50,12 @@ Please let us know your requirements, and we’ll be happy to assist you.
 Regards,
 Sana Craft 💐`;
 
-    const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
+    };
+
+    if (!requireAuth(sendCustomOrder, 'Sign in to book your custom order')) return;
+    sendCustomOrder();
   };
 
   return (

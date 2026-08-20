@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { BUSINESS_INFO } from '@/data/products';
 import { X, Star, ShoppingBag, MessageCircle, Heart, Check, Sparkles, ShieldCheck } from 'lucide-react';
 
@@ -15,6 +16,7 @@ export default function ProductModal() {
     toggleWishlist,
     wishlist
   } = useCart();
+  const { requireAuth } = useAuth();
 
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('Classic Original');
@@ -27,14 +29,19 @@ export default function ProductModal() {
   const isWishlisted = wishlist.includes(product.id);
 
   const handleAddToCart = () => {
-    addToCart(product, quantity, selectedColor, customNote);
-    setSelectedProductForModal(null);
+    const addItem = () => {
+      addToCart(product, quantity, selectedColor, customNote);
+      setSelectedProductForModal(null);
+    };
+    if (!requireAuth(addItem, 'Sign in to add this craft to your cart')) return;
+    addItem();
   };
 
   const handleDirectWhatsApp = () => {
-    const priceStr = formatPrice(product.priceUSD, product.priceINR);
-    const message = encodeURIComponent(
-      `Hello !
+    const sendInquiry = () => {
+      const priceStr = formatPrice(product.priceUSD, product.priceINR);
+      const message = encodeURIComponent(
+        `Hello !
 Thank you for reaching out to Sana Craft. 🌸✨
 We create handmade and customized pipe cleaner crafts.
 
@@ -49,9 +56,13 @@ Please let us know your requirements, and we’ll be happy to assist you.
 
 Regards,
 Sana Craft 💐`
-    );
+      );
 
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${message}`, '_blank');
+      window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${message}`, '_blank');
+    };
+
+    if (!requireAuth(sendInquiry, 'Sign in to book this craft')) return;
+    sendInquiry();
   };
 
   const colorVariants = [

@@ -15,6 +15,7 @@ import CartDrawer from '@/components/CartDrawer';
 import ProductModal from '@/components/ProductModal';
 import AuthModal from '@/components/AuthModal';
 import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton';
+import MemberDashboard from '@/components/MemberDashboard';
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <div className="min-h-screen flex flex-col justify-between selection:bg-[#7A3E38] selection:text-white">
           <Navbar />
           <main className="flex-grow">
+            <MemberDashboard />
             <Hero />
             <BrandStory />
             <ProductCatalog />

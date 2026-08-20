@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 export interface User {
   username: string;
@@ -14,9 +14,11 @@ interface AuthContextType {
   user: User | null;
   isAuthModalOpen: boolean;
   authTab: AuthTab;
+  authPrompt: string;
   setAuthTab: (tab: AuthTab) => void;
-  openAuthModal: (tab?: AuthTab) => void;
+  openAuthModal: (tab?: AuthTab, prompt?: string) => void;
   closeAuthModal: () => void;
+  requireAuth: (onAuthenticated?: () => void, prompt?: string) => boolean;
   login: (usernameOrEmail: string, password: string) => Promise<{ success: boolean; error?: string; needsSignup?: boolean }>;
   signup: (mobile: string, username: string, password: string, email?: string) => Promise<{ success: boolean; error?: string }>;
   forgotPassword: (identifier: string, newPassword: string) => Promise<{ success: boolean; error?: string }>;
@@ -29,6 +31,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authTab, setAuthTab] = useState<AuthTab>('signin');
+  const [authPrompt, setAuthPrompt] = useState('');
+  const pendingActionRef = useRef<(() => void) | null>(null);
 
   // Load saved session on mount
   useEffect(() => {
@@ -42,13 +46,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, []);
 
-  const openAuthModal = (tab: AuthTab = 'signin') => {
+  const openAuthModal = (tab: AuthTab = 'signin', prompt?: string) => {
     setAuthTab(tab);
+    setAuthPrompt(prompt || '');
     setIsAuthModalOpen(true);
   };
 
   const closeAuthModal = () => {
     setIsAuthModalOpen(false);
+    setAuthPrompt('');
+    pendingActionRef.current = null;
+  };
+
+  const requireAuth = (onAuthenticated?: () => void, prompt?: string) => {
+    if (user) return true;
+    pendingActionRef.current = onAuthenticated ?? null;
+    openAuthModal('signin', prompt || 'Please sign in to continue with your order.');
+    return false;
+  };
+
+  const runPendingAction = () => {
+    const action = pendingActionRef.current;
+    pendingActionRef.current = null;
+    if (action) {
+      setTimeout(action, 180);
+    }
   };
 
   const signup = async (mobile: string, username: string, password: string, email?: string) => {
@@ -66,7 +88,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       setUser(data.user);
       localStorage.setItem('sanacraft_session_user', JSON.stringify(data.user));
-      closeAuthModal();
+      setIsAuthModalOpen(false);
+      setAuthPrompt('');
+      runPendingAction();
       return { success: true };
     } catch (err: any) {
       return { success: false, error: err.message || 'Network error' };
@@ -92,7 +116,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       setUser(data.user);
       localStorage.setItem('sanacraft_session_user', JSON.stringify(data.user));
-      closeAuthModal();
+      setIsAuthModalOpen(false);
+      setAuthPrompt('');
+      runPendingAction();
       return { success: true };
     } catch (err: any) {
       return { success: false, error: err.message || 'Network error' };
@@ -134,9 +160,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         user,
         isAuthModalOpen,
         authTab,
+        authPrompt,
         setAuthTab,
         openAuthModal,
         closeAuthModal,
+        requireAuth,
         login,
         signup,
         forgotPassword,

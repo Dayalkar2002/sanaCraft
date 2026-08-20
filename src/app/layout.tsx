@@ -49,7 +49,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased selection:bg-[#E88D7D] selection:text-white bg-[#FAF6F0] text-[#2D2727]">
+      <body className="antialiased font-sans selection:bg-[#E88D7D] selection:text-white bg-[#FAF6F0] text-[#2D2727]">
         {children}
       </body>
     </html>

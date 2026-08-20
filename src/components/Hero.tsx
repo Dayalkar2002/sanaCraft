@@ -3,7 +3,6 @@
 import React from 'react';
 import { useCart } from '@/context/CartContext';
 import { BUSINESS_INFO, PRODUCTS } from '@/data/products';
-import SanadeLogo from '@/components/SanadeLogo';
 import { Sparkles, ArrowRight, Heart, ShieldCheck, Star, MessageCircle, Leaf } from 'lucide-react';
 
 export default function Hero() {
@@ -29,6 +28,7 @@ export default function Hero() {
       {/* Decorative Blur Orbs */}
       <div className="absolute top-10 left-1/4 w-72 h-72 bg-[#7A3E38]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-[#2D3A2C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -37,7 +37,7 @@ export default function Hero() {
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             
             {/* Tag Pill */}
-            <div className="inline-flex items-center gap-2 bg-[#FFFDF9] border border-[#7A3E38]/30 px-4 py-1.5 rounded-full text-xs font-bold text-[#7A3E38] shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-[#FFFDF9] border border-[#D4AF37]/40 px-4 py-1.5 rounded-full text-xs font-bold text-[#7A3E38] shadow-sm">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <span>{BUSINESS_INFO.secondaryTagline}</span>
             </div>
@@ -105,7 +105,7 @@ export default function Hero() {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
               {/* Glass Card Container */}
-              <div className="glass-card rounded-3xl p-4 sm:p-5 border border-[#7A3E38]/30 shadow-2xl space-y-4">
+              <div className="glass-card premium-card rounded-3xl p-4 sm:p-5 border border-[#D4AF37]/35 shadow-2xl space-y-4">
                 
                 {/* Main Product Showcase Image */}
                 <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden shadow-inner group">

@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { PRODUCTS, CATEGORIES, Product, BUSINESS_INFO } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { Search, Star, ShoppingBag, MessageCircle, Heart, Eye, Sparkles, Filter } from 'lucide-react';
 
 export default function ProductCatalog() {
@@ -15,6 +16,7 @@ export default function ProductCatalog() {
     wishlist,
     currency
   } = useCart();
+  const { requireAuth } = useAuth();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -40,9 +42,10 @@ export default function ProductCatalog() {
 
   const handleWhatsAppOrderSingle = (product: Product, e: React.MouseEvent) => {
     e.stopPropagation();
-    const priceStr = formatPrice(product.priceUSD, product.priceINR);
-    const message = encodeURIComponent(
-      `Hello !
+    const sendInquiry = () => {
+      const priceStr = formatPrice(product.priceUSD, product.priceINR);
+      const message = encodeURIComponent(
+        `Hello !
 Thank you for reaching out to Sana Craft. 🌸✨
 We create handmade and customized pipe cleaner crafts.
 
@@ -54,8 +57,18 @@ Please let us know your requirements, and we’ll be happy to assist you.
 
 Regards,
 Sana Craft 💐`
-    );
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${message}`, '_blank');
+      );
+      window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${message}`, '_blank');
+    };
+
+    if (!requireAuth(sendInquiry, 'Sign in to book this craft')) return;
+    sendInquiry();
+  };
+
+  const handleAddToCart = (product: Product, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!requireAuth(() => addToCart(product), 'Sign in to add this craft to your cart')) return;
+    addToCart(product);
   };
 
   return (
@@ -206,7 +219,7 @@ Sana Craft 💐`
                 <div
                   key={product.id}
                   onClick={() => setSelectedProductForModal(product)}
-                  className="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group cursor-pointer transition-all duration-300 hover:-translate-y-1.5 border border-[#E88D7D]/20 shadow-sm hover:shadow-xl"
+                  className="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group cursor-pointer transition-all duration-300 hover:-translate-y-1.5 border border-[#E88D7D]/20 hover:border-[#D4AF37]/50 shadow-sm hover:shadow-xl premium-card"
                 >
                   {/* Image Header Container */}
                   <div className="relative aspect-[4/5] w-full bg-[#FAF6F0] overflow-hidden">
@@ -298,10 +311,7 @@ Sana Craft 💐`
                       {/* Card Action Buttons */}
                       <div className="grid grid-cols-2 gap-2">
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addToCart(product);
-                          }}
+                          onClick={(e) => handleAddToCart(product, e)}
                           className="w-full bg-[#FAF6F0] hover:bg-[#C95B4A] text-[#8E2020] hover:text-white border border-[#E88D7D]/40 font-semibold py-2 rounded-xl text-xs flex items-center justify-center gap-1 transition-all"
                         >
                           <ShoppingBag className="w-3.5 h-3.5" />

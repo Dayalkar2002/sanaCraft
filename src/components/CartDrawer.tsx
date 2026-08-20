@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { BUSINESS_INFO } from '@/data/products';
 import { X, Trash2, Plus, Minus, MessageCircle, ShoppingBag, ArrowRight, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -21,6 +22,7 @@ export default function CartDrawer() {
     currency,
     formatPrice
   } = useCart();
+  const { requireAuth } = useAuth();
 
   if (!isCartOpen) return null;
 
@@ -39,21 +41,22 @@ export default function CartDrawer() {
   const handleCheckoutWhatsApp = () => {
     if (cart.length === 0) return;
 
-    triggerConfetti();
+    const sendOrder = () => {
+      triggerConfetti();
 
-    let itemsList = '';
-    cart.forEach((item, index) => {
-      const priceStr = formatPrice(item.product.priceUSD, item.product.priceINR);
-      const subtotalStr = formatPrice(item.product.priceUSD * item.quantity, item.product.priceINR * item.quantity);
-      itemsList += `${index + 1}. *${item.product.title}*\n   Qty: ${item.quantity} | Unit: ${priceStr} | Subtotal: ${subtotalStr}`;
-      if (item.selectedColor) itemsList += `\n   Variant: ${item.selectedColor}`;
-      if (item.customNote) itemsList += `\n   Note: ${item.customNote}`;
-      itemsList += `\n\n`;
-    });
+      let itemsList = '';
+      cart.forEach((item, index) => {
+        const priceStr = formatPrice(item.product.priceUSD, item.product.priceINR);
+        const subtotalStr = formatPrice(item.product.priceUSD * item.quantity, item.product.priceINR * item.quantity);
+        itemsList += `${index + 1}. *${item.product.title}*\n   Qty: ${item.quantity} | Unit: ${priceStr} | Subtotal: ${subtotalStr}`;
+        if (item.selectedColor) itemsList += `\n   Variant: ${item.selectedColor}`;
+        if (item.customNote) itemsList += `\n   Note: ${item.customNote}`;
+        itemsList += `\n\n`;
+      });
 
-    const grandTotal = formatPrice(totalPriceUSD, totalPriceINR);
+      const grandTotal = formatPrice(totalPriceUSD, totalPriceINR);
 
-    const messageText = `Hello !
+      const messageText = `Hello !
 Thank you for reaching out to Sana Craft. 🌸✨
 We create handmade and customized pipe cleaner crafts.
 
@@ -66,8 +69,12 @@ Please let us know your requirements, and we’ll be happy to assist you.
 Regards,
 Sana Craft 💐`;
 
-    const encoded = encodeURIComponent(messageText);
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
+      const encoded = encodeURIComponent(messageText);
+      window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
+    };
+
+    if (!requireAuth(sendOrder, 'Sign in to book your cart order')) return;
+    sendOrder();
   };
 
   return (
@@ -82,7 +89,7 @@ Sana Craft 💐`;
         <div className="w-screen max-w-md bg-[#FFFDF9] shadow-2xl flex flex-col justify-between border-l border-[#E88D7D]/30">
           
           {/* Header */}
-          <div className="p-6 bg-gradient-to-r from-[#8E2020] to-[#C95B4A] text-white flex items-center justify-between shadow-md">
+          <div className="p-6 bg-gradient-to-r from-[#1A1412] via-[#7A3E38] to-[#2D3A2C] text-white flex items-center justify-between shadow-md border-b border-[#D4AF37]/30">
             <div className="flex items-center gap-2">
               <ShoppingBag className="w-6 h-6" />
               <h2 className="text-xl font-serif font-bold">Your Inquiry Cart</h2>

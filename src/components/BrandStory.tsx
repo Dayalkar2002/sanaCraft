@@ -11,7 +11,7 @@ export default function BrandStory() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Card Showcase */}
-        <div className="bg-[#2D3A2C] text-[#FAF6F0] rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-[#D4AF37]/30">
+        <div className="bg-[#2D3A2C] text-[#FAF6F0] rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-[#D4AF37]/40">
           
           {/* Subtle Background Flourish */}
           <div className="absolute top-0 right-0 p-12 opacity-5 text-9xl font-serif select-none">
@@ -58,7 +58,7 @@ export default function BrandStory() {
           {/* Right Column: Business Card Graphic Preview */}
           <div className="lg:col-span-6 bg-[#FAF6F0] text-[#2D2727] p-6 sm:p-8 rounded-2xl shadow-xl border border-[#7A3E38]/20 space-y-6">
             <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-              <SanadeLogo size="lg" />
+              <SanadeLogo size="lg" showTagline={false} />
               <div className="text-right">
                 <span className="text-[10px] uppercase font-bold text-[#7A3E38] tracking-widest block">Official Stamp</span>
                 <span className="text-xs font-serif italic text-gray-500">Made with love in India ♥</span>
@@ -89,7 +89,7 @@ export default function BrandStory() {
 
         {/* 4 Key Pillars Badges */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-4">
-          <div className="bg-white p-5 rounded-2xl border border-[#7A3E38]/20 shadow-sm text-center space-y-2 hover:shadow-md transition-shadow">
+          <div className="bg-white p-5 rounded-2xl border border-[#7A3E38]/20 shadow-sm text-center space-y-2 hover:shadow-md transition-shadow premium-card">
             <div className="w-12 h-12 rounded-full bg-[#7A3E38]/10 text-[#7A3E38] flex items-center justify-center mx-auto text-xl">
               <HandHeart className="w-6 h-6" />
             </div>

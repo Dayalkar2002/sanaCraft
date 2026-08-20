@@ -11,6 +11,7 @@ export default function AuthModal() {
     closeAuthModal,
     authTab,
     setAuthTab,
+    authPrompt,
     login,
     signup,
     forgotPassword
@@ -138,15 +139,15 @@ export default function AuthModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto p-4 sm:p-6 flex items-center justify-center">
+    <div className="fixed inset-0 z-[80] overflow-y-auto p-4 sm:p-6 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/65 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity"
         onClick={closeAuthModal}
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-md bg-[#FFFDF9] rounded-3xl shadow-2xl overflow-hidden border border-[#E88D7D]/30 z-10 my-auto animate-scaleUp">
+      <div className="relative w-full max-w-md bg-[#FFFDF9] rounded-3xl shadow-2xl overflow-hidden border border-[#D4AF37]/40 z-10 my-auto animate-scaleUp">
         
         {/* Header */}
         <div className="bg-gradient-to-r from-[#8E2020] via-[#C95B4A] to-[#8E2020] text-white p-6 text-center relative shadow-md">
@@ -157,13 +158,13 @@ export default function AuthModal() {
             <X className="w-5 h-5" />
           </button>
 
-          <div className="w-12 h-12 rounded-full bg-white/20 text-2xl flex items-center justify-center mx-auto mb-2 border border-white/30">
-            🌸
+          <div className="w-16 h-16 rounded-2xl overflow-hidden bg-[#F8F1E7] mx-auto mb-2 ring-1 ring-[#D4AF37]/50 shadow-md">
+            <img src="/images/snd-logo.png" alt="SND logo" className="w-full h-full object-cover" />
           </div>
-          <h2 className="text-xl font-serif font-bold tracking-tight">sanaCraft Account</h2>
+          <h2 className="text-xl font-serif font-bold tracking-tight">SND Account</h2>
           <p className="text-xs text-rose-100 flex items-center justify-center gap-1 mt-0.5">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>Handcrafted Elegance, Timeless Artistry</span>
+            <span>{authPrompt || 'Handcrafted Elegance, Timeless Artistry'}</span>
           </p>
 
           {/* Navigation Tabs */}
